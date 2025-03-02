@@ -1,0 +1,21 @@
+services:
+  void-db:
+    build: 
+      context: ./void-db
+    image: void-db
+    ports:
+      - "5432:5432"
+    networks:
+      - void-network
+  void-db-controller:
+    build: 
+      context: ./void-db-controller
+    image: void-db-controller
+    ports:
+      - "8082:8080"
+    networks:
+      - void-network
+networks:
+  void-network:
+    driver: bridge
+    name: void-network
