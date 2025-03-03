@@ -1,13 +1,3 @@
-services:
-  void-db-users-db:
-    build: 
-      context: ./void-db
-    image: void-db
-    networks:
-      - void-network
-    volumes:
-      - ./void-db/users:/var/lib/postgresql/data
-      
   void-db-characters-db:
     image: void-db
     networks:
@@ -43,28 +33,3 @@ services:
       - void-db-users-db
     volumes:
       - ./void-db/enemies:/var/lib/postgresql/data
-      
-  void-db-users:
-    build: 
-      context: ./void-db-users
-    image: void-db-users
-    networks:
-      - void-network
-    depends_on: 
-      - void-db-users-db
-           
-  void-gate:
-    build: 
-      context: ./void-gate
-    image: void-gate
-    ports:
-      - "8090:8080"
-    networks:
-      - void-network
-      
-networks:
-  void-network:
-    driver: bridge
-    name: void-network
-    
-    
